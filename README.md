@@ -1,3 +1,14 @@
+# Proof of Concept EEPROM
+
+## Pinout
+
+| FROM | TO | Description|
+| :---- | :---- | :----- |
+| SDA-EEPROM | SDA-µC | The Data-line of the I2C bus |
+| SCL-EEPROM | SCL-µC | The Clok-line of the I2C bus |
+| Vdd | Vcc | A 3v3 power suply |
+| GND | Ground | Common Ground |
+
 ## Example code for I2C  
 (Source: https://os.mbed.com/forum/mbed/topic/3856/?page=1#comment-56893)
 
@@ -54,12 +65,3 @@ int main()
     } 
 }
 ```
-
-### Pinout
-
-| FROM | TO | Description|
-| :---- | :---- | :----- |
-| SDA-EEPROM | SDA-µC | The Data-line of the I2C bus |
-| SCL-EEPROM | SCL-µC | The Clok-line of the I2C bus |
-| Vdd | Vcc | A 3v3 power suply |
-| GND | Ground | Common Ground |
