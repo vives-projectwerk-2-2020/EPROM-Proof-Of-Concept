@@ -1,13 +1,16 @@
-Example code for I2C
+## Example code for I2C  
+(Source: https://os.mbed.com/forum/mbed/topic/3856/?page=1#comment-56893)
 
 ```
 #include "mbed.h"
  
-I2C i2c(p9, p10);        // sda, scl
+I2C i2c(D14, D15);       // sda, scl
+/* With the used shield and µC we need to select teh folowinng pins */
 Serial pc(USBTX, USBRX); // tx, rx
  
-const int addr = 0x00 ... 0x07; // define the correct I2C Address    
- 
+const int addr = 0x50 << 1;; 
+/* We are Using the SOT23 package of the 24AA64 EEPROM and thus we can't select the I2C address so we need to get is from the data sheet. Address in binary: 1010000 */
+
 int main() 
 {
     char regaddr[1];
@@ -31,14 +34,15 @@ int main()
  
         // copy the data, starting with register address
         writedata[0] = regaddr[0];  // register address
-        writedata[1] = readdata[0]; // length, should be 7
-        writedata[2] = readdata[1]; // byte 1
-        writedata[3] = readdata[2];
-        writedata[4] = readdata[3];
-        writedata[5] = readdata[4];
-        writedata[6] = readdata[5];
-        writedata[7] = readdata[6];
-        writedata[8] = readdata[7]; // byte 7
+        writedata[1] = regaddr[1];  // register address part 2
+        writedata[2] = 0x00; // byte 1
+        writedata[3] = 0xAA;
+        writedata[4] = 0xAA;
+        writedata[5] = 0xAA;
+        writedata[6] = 0xAA;
+        writedata[7] = 0xAA;
+        writedata[8] = 0xAA;
+        writedata[9] = 0xBB;// byte 7
  
         // write the data
         i2c.write(addr, writedata, 9); // select the register, 
