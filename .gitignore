@@ -3,3 +3,4 @@ mbed*
 BUILD
 .vscode
 mbed-os/
+.DS_Store
